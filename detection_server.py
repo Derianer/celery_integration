@@ -1,7 +1,12 @@
 from aiohttp import web
+from task_queue.detection_task import hard_task
 import asyncio
 
 
+class DetectionQueue:
+
+    def __init__(self):
+        pass
 
 class DetectionHandler:
 
@@ -15,9 +20,10 @@ class DetectionHandler:
         async def handle_task(request:web.Request):
             try:
                 print("connected !")
-                asyncio.sleep(4)
-                print(await request.text())
-            except BaseException as ex:
+                res = hard_task.delay(4)
+                await asyncio.sleep(1)
+                print(res.get())
+            except asyncio.CancelledError as ex:
                 print(ex)
             else:
                 return web.Response(text="Hello you to")
