@@ -1,5 +1,6 @@
 from aiohttp import web
-from task_queue.detection_task import hard_task
+from detection.detection_task import detect_cards
+# from task_queue.celery import celery_app
 import asyncio
 
 
@@ -20,11 +21,12 @@ class DetectionHandler:
         async def handle_task(request:web.Request):
             try:
                 print("connected !")
-                res = hard_task.delay(4)
-                await asyncio.sleep(1)
+                res = detect_cards.delay(4)
+                await asyncio.sleep(5)
                 print(res.get())
             except asyncio.CancelledError as ex:
                 print(ex)
+                return web.HTTPInternalServerError()
             else:
                 return web.Response(text="Hello you to")
 
