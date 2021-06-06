@@ -4,7 +4,7 @@ import time
 import cv2
 from celery import Task, exceptions
 from task_queue.celery import celery_app
-from detection.card_detection import card_detection, darknet
+# from detection.card_detection import card_detection, darknet
 
 
 class DetectionError(Exception):
