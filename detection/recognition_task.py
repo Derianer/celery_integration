@@ -4,11 +4,13 @@ from task_queue.celery import celery_app
 import tesserocr
 import io
 import sys 
+import os
 
 
 
 @celery_app.task
 def recongition_task(image_data:bytes, *args, **kwargs):
+    os.environ['OMP_THREAD_LIMIT'] = '1'
     print(sys.getsizeof(image_data))
     buff = io.BytesIO(image_data)
     # print(sys.getsizeof(buff))

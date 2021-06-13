@@ -1,0 +1,13 @@
+[Unit]
+Description=Worker for recognition server
+Requires=redis.service
+After=redis.service
+
+[Service]
+Type=simple
+WorkingDirectory=/home/aleksandr/celery_integration/ 
+ExecStart=celery -A task_queue worker -l INFO
+Restart=on-faliure
+
+[Install]
+WantedBy=multi-user.target

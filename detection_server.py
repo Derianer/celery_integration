@@ -1,3 +1,4 @@
+#!/bin/python3
 from aiohttp import web
 import aiohttp
 # from detection.detection_task import detect_cards
@@ -78,7 +79,7 @@ class DetectionHandler:
 
 class DetectionServer:
 
-    def __init__(self, host='192.168.1.167', port=6451):
+    def __init__(self, host='0.0.0.0', port=6451):
         self._host = host
         self._port = port
         self._det_handler = DetectionHandler()
