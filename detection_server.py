@@ -43,6 +43,7 @@ class DetectionHandler:
                 await asyncio.sleep(1)
         except result.TimeoutError:
             print('Task timeout exceeded')
+            raise
         except Exception:
             print('Internal task error')
             raise
